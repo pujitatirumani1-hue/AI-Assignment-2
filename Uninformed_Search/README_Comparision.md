@@ -34,6 +34,22 @@ DFS typically uses a stack (LIFO – Last In First Out) or recursion to manage t
 6. Continue this process until all nodes are explored or the goal state is found.
 
 DFS usually uses less memory than BFS, but it is not guaranteed to find the shortest path.
+# Uniform Cost Search (UCS)
+
+Uniform Cost Search (UCS) is an uninformed search algorithm used to find the lowest cost path from a starting node to a goal node in a graph or state space.
+
+Unlike BFS, which expands nodes based on their depth, UCS expands the node with the smallest path cost first. This ensures that the algorithm always explores the most promising path in terms of cost.
+
+## How UCS Works
+
+1. Start from the initial node.
+2. Add the node to a priority queue with cost 0.
+3. Remove the node with the lowest path cost from the queue.
+4. Check if it is the goal node.
+5. If not, expand the node and add its neighboring nodes to the queue with their updated path costs.
+6. Repeat the process until the goal node is reached.
+
+Because UCS always selects the node with the lowest cumulative cost, it guarantees finding the optimal solution when all costs are non-negative.
 
 # Water Jug Problem
 
@@ -65,15 +81,17 @@ Example state representation:
 (1,0)
 
 Search algorithms like BFS and DFS are used to explore these states until the goal state is reached.
-# Comparison of BFS and DFS
+# Comparison of BFS, DFS and UCS
 
-Breadth First Search (BFS) and Depth First Search (DFS) are uninformed search algorithms used to explore a state space. Although both are used to traverse graphs or solve search problems, they differ in how they explore nodes and in their performance characteristics.
+Breadth First Search (BFS), Depth First Search (DFS), and Uniform Cost Search (UCS) are uninformed search algorithms used to explore a state space. Although they are all used to traverse graphs or solve search problems, they differ in how they explore nodes and how they choose the next node to expand.
 
 ## Exploration Strategy
 
-BFS explores nodes level by level. It first visits all nodes at the current depth before moving to the next level.
+BFS explores nodes level by level. It visits all nodes at the current depth before moving to the next depth level.
 
 DFS explores nodes by going as deep as possible along one path before backtracking to explore other paths.
+
+UCS explores nodes based on the lowest path cost from the start node. It always expands the node that has the smallest cumulative cost.
 
 ## Data Structure Used
 
@@ -81,25 +99,36 @@ BFS uses a queue (FIFO – First In First Out) to store nodes that need to be ex
 
 DFS uses a stack (LIFO – Last In First Out) or recursion to explore nodes.
 
+UCS uses a priority queue where nodes are ordered according to their total path cost.
+
 ## Memory Usage
 
-BFS usually requires more memory because it must store all nodes at the current level before moving deeper into the search tree.
+BFS usually requires more memory because it stores all nodes at the current level before moving deeper into the search tree.
 
-DFS typically uses less memory because it only stores the nodes along the current path being explored.
+DFS typically uses less memory because it only stores nodes along the current path being explored.
+
+UCS can require significant memory because it stores multiple paths in the priority queue to ensure the lowest cost path is always selected.
 
 ## Speed / Execution Time
 
 DFS is generally faster in many problems because it quickly explores deeper paths without storing large numbers of nodes.
 
+In the implementation provided in `Water_Jug_Problem.c`, the program measures and displays the execution time for BFS and DFS. From the output we observe that BFS takes significantly more time compared to DFS for this problem, showing that DFS runs faster in this implementation.
 
-In the implementation provided in `Water_Jug_Problem.c`, the program measures and displays the execution time for both BFS and DFS. From the output we observe that BFS takes significantly more time compared to DFS for this problem, showing that DFS runs faster in this implementation.
+UCS may be slower than both BFS and DFS because it must constantly check and update path costs while selecting the node with the smallest cost.
 
 ## Optimality
 
-BFS guarantees the shortest path to the goal if all actions have equal cost.
+BFS guarantees the shortest path to the goal when all actions have equal cost.
 
 DFS does not guarantee the shortest solution because it may follow a longer path before finding the goal.
 
+UCS guarantees the optimal solution because it always expands the node with the lowest cumulative cost.
+
 ## Summary
 
-BFS is useful when the shortest solution path is required, but it may consume more memory and time. DFS is more memory efficient and often faster in practice, but it does not always produce the optimal solution.
+BFS is useful when the shortest path in terms of number of steps is required, but it may consume more memory.
+
+DFS is more memory efficient and often faster in practice, but it does not always produce the optimal solution.
+
+UCS is useful when actions have different costs and the lowest cost path must be found, although it may require more computation and memory.
