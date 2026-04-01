@@ -1,4 +1,4 @@
-# AI-Assignments
+# AI-Assignment-2
 This repository contains simple implementations of different Artificial Intelligence concepts in C.
 
 ## Contents
